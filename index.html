@@ -2,1513 +2,1304 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0f172a">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#172554">
+
 <title>BorrowBox</title>
 
 <style>
-:root{
-  --bg:#f4f7fb;
-  --card:#ffffff;
-  --text:#111827;
-  --muted:#64748b;
-  --border:#e2e8f0;
-  --primary:#2563eb;
-  --primary-dark:#1d4ed8;
-  --green:#16a34a;
-  --red:#dc2626;
-  --orange:#ea580c;
-  --shadow:0 8px 25px rgba(15,23,42,.07);
+
+/* =========================
+   VARIABLES
+========================= */
+
+:root {
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --text: #111827;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --green: #16a34a;
+    --orange: #ea580c;
+    --red: #dc2626;
+    --shadow: 0 8px 25px rgba(15,23,42,0.07);
 }
 
-*{
-  box-sizing:border-box;
+body.dark {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --border: #334155;
+    --shadow: 0 8px 25px rgba(0,0,0,0.25);
 }
 
-html{
-  scroll-behavior:smooth;
+
+/* =========================
+   BASIC
+========================= */
+
+* {
+    box-sizing: border-box;
 }
 
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
+html {
+    scroll-behavior: smooth;
 }
 
-body.dark{
-  --bg:#0f172a;
-  --card:#1e293b;
-  --text:#f8fafc;
-  --muted:#94a3b8;
-  --border:#334155;
-  --shadow:0 8px 25px rgba(0,0,0,.25);
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    transition: background 0.2s, color 0.2s;
 }
 
-/* HEADER */
-
-.topbar{
-  background:linear-gradient(135deg,#0f172a,#1e3a8a);
-  color:white;
-  padding:20px 16px 24px;
-  border-radius:0 0 28px 28px;
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
 }
 
-.topbar-inner{
-  max-width:850px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+button {
+    cursor: pointer;
 }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
+button:active {
+    transform: scale(0.98);
 }
 
-.logo{
-  width:48px;
-  height:48px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(255,255,255,.13);
-  border-radius:15px;
-  font-size:25px;
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    background: linear-gradient(135deg, #0f172a, #1d4ed8);
+    color: white;
+    padding: 22px 16px 26px;
+    border-radius: 0 0 28px 28px;
 }
 
-.brand h1{
-  margin:0;
-  font-size:25px;
+.header-inner {
+    max-width: 850px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.brand p{
-  margin:4px 0 0;
-  color:#cbd5e1;
-  font-size:13px;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.theme-btn{
-  width:42px;
-  height:42px;
-  border:1px solid rgba(255,255,255,.2);
-  background:rgba(255,255,255,.1);
-  color:white;
-  border-radius:12px;
-  font-size:19px;
+.logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
 }
 
-/* CONTAINER */
-
-.container{
-  max-width:850px;
-  margin:auto;
-  padding:20px 16px 50px;
+.brand h1 {
+    margin: 0;
+    font-size: 25px;
 }
 
-/* NAVIGATION */
-
-.screen{
-  display:none;
+.brand p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #dbeafe;
 }
 
-.screen.active{
-  display:block;
+.theme-button {
+    width: 43px;
+    height: 43px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 13px;
+    background: rgba(255,255,255,0.12);
+    color: white;
+    font-size: 19px;
 }
 
-.back-row{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:16px;
+
+/* =========================
+   MAIN
+========================= */
+
+.container {
+    max-width: 850px;
+    margin: auto;
+    padding: 20px 16px 50px;
 }
 
-.back-btn{
-  width:42px;
-  height:42px;
-  border:1px solid var(--border);
-  background:var(--card);
-  color:var(--text);
-  border-radius:12px;
-  font-size:22px;
-  box-shadow:var(--shadow);
+.screen {
+    display: none;
 }
 
-.back-title{
-  font-size:20px;
-  font-weight:800;
+.screen.active {
+    display: block;
 }
 
-/* BUTTONS */
 
-.primary-btn{
-  width:100%;
-  border:0;
-  background:var(--primary);
-  color:white;
-  padding:16px;
-  border-radius:15px;
-  font-weight:700;
-  font-size:16px;
-  box-shadow:0 6px 16px rgba(37,99,235,.2);
+/* =========================
+   BUTTONS
+========================= */
+
+.primary-button {
+    width: 100%;
+    border: 0;
+    border-radius: 15px;
+    padding: 16px;
+    background: var(--primary);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 6px 18px rgba(37,99,235,0.20);
 }
 
-.primary-btn:hover{
-  background:var(--primary-dark);
+.primary-button:hover {
+    background: var(--primary-dark);
 }
 
-.secondary-btn{
-  width:100%;
-  border:1px solid var(--border);
-  background:var(--card);
-  color:var(--text);
-  padding:14px;
-  border-radius:13px;
-  font-weight:700;
+.secondary-button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 13px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-weight: bold;
 }
 
-/* QUICK ACTIONS */
 
-.quick-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:14px;
+/* =========================
+   QUICK BUTTONS
+========================= */
+
+.quick-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
 }
 
-.quick-btn{
-  border:1px solid var(--border);
-  background:var(--card);
-  color:var(--text);
-  padding:15px 10px;
-  border-radius:15px;
-  font-weight:700;
-  box-shadow:var(--shadow);
+.quick-button {
+    padding: 15px 10px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-weight: bold;
+    box-shadow: var(--shadow);
 }
 
-/* STATS */
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin:18px 0;
+/* =========================
+   STATS
+========================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 18px 0;
 }
 
-.stat{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:16px;
-  box-shadow:var(--shadow);
+.stat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    padding: 16px;
+    box-shadow: var(--shadow);
 }
 
-.stat-icon{
-  font-size:21px;
+.stat-icon {
+    font-size: 21px;
 }
 
-.stat-number{
-  font-size:25px;
-  font-weight:800;
-  margin-top:7px;
+.stat-number {
+    margin-top: 6px;
+    font-size: 25px;
+    font-weight: 800;
 }
 
-.stat-label{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:2px;
+.stat-label {
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 12px;
 }
 
-/* CARDS */
 
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:19px;
-  padding:18px;
-  margin-bottom:16px;
-  box-shadow:var(--shadow);
+/* =========================
+   CARDS
+========================= */
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 19px;
+    padding: 18px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
 }
 
-.card-title{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:14px;
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
 }
 
-.card-title h2{
-  margin:0;
-  font-size:18px;
+.card-title h2 {
+    margin: 0;
+    font-size: 18px;
 }
 
-/* SEARCH */
 
-.search{
-  width:100%;
-  padding:13px 15px;
-  border:1px solid var(--border);
-  background:var(--bg);
-  color:var(--text);
-  border-radius:12px;
-  outline:none;
-  margin-bottom:13px;
+/* =========================
+   SCREEN HEADER
+========================= */
+
+.screen-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
 }
 
-.search:focus,
+.back-button {
+    width: 43px;
+    height: 43px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-size: 22px;
+    box-shadow: var(--shadow);
+}
+
+.screen-title {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    outline: none;
+    background: var(--bg);
+    color: var(--text);
+    margin-bottom: 13px;
+}
+
+.search-input:focus,
 input:focus,
 select:focus,
-textarea:focus{
-  border-color:var(--primary);
+textarea:focus {
+    border-color: var(--primary);
 }
 
-/* ITEMS */
 
-.item{
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:15px;
-  margin-top:10px;
+/* =========================
+   LENDING ITEM
+========================= */
+
+.lending-item {
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 10px;
 }
 
-.item-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:10px;
+.item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
 }
 
-.item-name{
-  font-size:17px;
-  font-weight:750;
+.item-name {
+    font-size: 17px;
+    font-weight: 800;
 }
 
-.person{
-  color:var(--muted);
-  font-size:13px;
-  margin-top:5px;
+.person {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 5px;
 }
 
-.badge{
-  padding:5px 9px;
-  border-radius:20px;
-  font-size:10px;
-  font-weight:700;
-  white-space:nowrap;
-  display:inline-block;
-  margin-bottom:4px;
+.badges {
+    text-align: right;
 }
 
-.badge-item{
-  background:#dbeafe;
-  color:#1d4ed8;
+.badge {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 800;
+    margin-bottom: 4px;
 }
 
-.badge-money{
-  background:#dcfce7;
-  color:#15803d;
+.badge-item {
+    background: #dbeafe;
+    color: #1d4ed8;
 }
 
-.badge-due{
-  background:#ffedd5;
-  color:#c2410c;
+.badge-money {
+    background: #dcfce7;
+    color: #15803d;
 }
 
-.badge-overdue{
-  background:#fee2e2;
-  color:#b91c1c;
+.badge-due {
+    background: #ffedd5;
+    color: #c2410c;
 }
 
-.badge-returned{
-  background:#dcfce7;
-  color:#166534;
+.badge-overdue {
+    background: #fee2e2;
+    color: #b91c1c;
 }
 
-.details{
-  margin-top:12px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
+.badge-returned {
+    background: #dcfce7;
+    color: #166534;
 }
 
-.detail{
-  background:var(--bg);
-  padding:9px;
-  border-radius:10px;
-  font-size:12px;
+.details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
 }
 
-.detail span{
-  display:block;
-  color:var(--muted);
-  margin-bottom:3px;
+.detail {
+    background: var(--bg);
+    padding: 9px;
+    border-radius: 10px;
+    font-size: 12px;
 }
 
-.actions{
-  display:flex;
-  gap:8px;
-  margin-top:12px;
+.detail span {
+    display: block;
+    color: var(--muted);
+    margin-bottom: 3px;
 }
 
-.action{
-  flex:1;
-  border:0;
-  padding:10px 7px;
-  border-radius:10px;
-  font-size:12px;
-  font-weight:700;
+.note {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 10px;
 }
 
-.return{
-  background:#dcfce7;
-  color:#166534;
+.item-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
 }
 
-.edit{
-  background:#dbeafe;
-  color:#1d4ed8;
+.item-action {
+    flex: 1;
+    border: 0;
+    padding: 10px 7px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 800;
 }
 
-.delete{
-  background:#fee2e2;
-  color:#b91c1c;
+.return-button {
+    background: #dcfce7;
+    color: #166534;
 }
 
-.empty{
-  text-align:center;
-  color:var(--muted);
-  padding:25px 10px;
-  font-size:14px;
+.edit-button {
+    background: #dbeafe;
+    color: #1d4ed8;
 }
 
-/* MODAL */
-
-.modal-bg{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.58);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:16px;
-  z-index:1000;
+.delete-button {
+    background: #fee2e2;
+    color: #b91c1c;
 }
 
-.modal{
-  width:100%;
-  max-width:500px;
-  max-height:90vh;
-  overflow:auto;
-  background:var(--card);
-  color:var(--text);
-  border-radius:22px;
-  padding:20px;
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 25px 10px;
+    font-size: 14px;
 }
 
-.modal-header{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:18px;
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(0,0,0,0.60);
 }
 
-.modal-header h2{
-  margin:0;
-  font-size:20px;
+.modal-overlay.show {
+    display: flex;
 }
 
-.modal-back{
-  width:40px;
-  height:40px;
-  border:1px solid var(--border);
-  background:var(--bg);
-  color:var(--text);
-  border-radius:11px;
-  font-size:20px;
+.modal {
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 20px;
+    border-radius: 22px;
+    background: var(--card);
+    color: var(--text);
 }
 
-label{
-  display:block;
-  font-size:13px;
-  font-weight:700;
-  margin:13px 0 6px;
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.modal-back {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 20px;
+}
+
+label {
+    display: block;
+    margin: 13px 0 6px;
+    font-size: 13px;
+    font-weight: bold;
 }
 
 input,
 select,
-textarea{
-  width:100%;
-  padding:12px;
-  border:1px solid var(--border);
-  border-radius:11px;
-  background:var(--bg);
-  color:var(--text);
-  outline:none;
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    outline: none;
+    background: var(--bg);
+    color: var(--text);
 }
 
-textarea{
-  resize:vertical;
-  min-height:75px;
+textarea {
+    min-height: 80px;
+    resize: vertical;
 }
 
-.type-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+.type-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
-.type-btn{
-  padding:12px;
-  border:1px solid var(--border);
-  background:var(--bg);
-  color:var(--text);
-  border-radius:11px;
-  font-weight:700;
+.type-button {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: var(--bg);
+    color: var(--text);
+    font-weight: bold;
 }
 
-.type-btn.active{
-  border-color:var(--primary);
-  background:#dbeafe;
-  color:#1d4ed8;
+.type-button.selected {
+    background: #dbeafe;
+    border-color: var(--primary);
+    color: #1d4ed8;
 }
 
-.modal-actions{
-  display:flex;
-  gap:10px;
-  margin-top:18px;
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
 }
 
-.modal-actions button{
-  flex:1;
-  padding:12px;
-  border:0;
-  border-radius:11px;
-  font-weight:700;
+.modal-actions button {
+    flex: 1;
+    padding: 13px;
+    border: 0;
+    border-radius: 11px;
+    font-weight: bold;
 }
 
-.cancel{
-  background:var(--border);
-  color:var(--text);
+.cancel-button {
+    background: var(--border);
+    color: var(--text);
 }
 
-.save{
-  background:var(--primary);
-  color:white;
+.save-button {
+    background: var(--primary);
+    color: white;
 }
 
-/* SETTINGS */
 
-.setting-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  padding:15px 0;
-  border-bottom:1px solid var(--border);
+/* =========================
+   SETTINGS
+========================= */
+
+.setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border);
 }
 
-.setting-row:last-child{
-  border-bottom:0;
+.setting-row:last-child {
+    border-bottom: 0;
 }
 
-.setting-info strong{
-  display:block;
-  font-size:15px;
+.setting-text strong {
+    display: block;
+    font-size: 15px;
 }
 
-.setting-info span{
-  display:block;
-  color:var(--muted);
-  font-size:12px;
-  margin-top:4px;
+.setting-text span {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 12px;
 }
 
-.danger-btn{
-  width:100%;
-  margin-top:12px;
-  padding:13px;
-  border:0;
-  border-radius:11px;
-  background:#fee2e2;
-  color:#b91c1c;
-  font-weight:700;
+.small-button {
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--text);
+    font-weight: bold;
 }
 
-/* FOOTER */
-
-.footer{
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-  padding:15px;
+.danger-button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 13px;
+    border: 0;
+    border-radius: 11px;
+    background: #fee2e2;
+    color: #b91c1c;
+    font-weight: bold;
 }
 
-/* MOBILE */
 
-@media(max-width:600px){
+/* =========================
+   ABOUT
+========================= */
 
-  .stats{
-    gap:8px;
-  }
-
-  .stat{
-    padding:12px 9px;
-  }
-
-  .stat-number{
-    font-size:20px;
-  }
-
-  .actions{
-    flex-wrap:wrap;
-  }
-
-  .action{
-    min-width:30%;
-  }
+.about-box {
+    text-align: center;
+    padding: 15px 5px;
 }
+
+.about-logo {
+    width: 70px;
+    height: 70px;
+    margin: auto;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,#172554,#2563eb);
+    font-size: 35px;
+}
+
+.about-box h2 {
+    margin: 14px 0 5px;
+}
+
+.about-box p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.creator {
+    margin-top: 18px;
+    padding: 15px;
+    border-radius: 14px;
+    background: var(--bg);
+}
+
+.creator strong {
+    display: block;
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    text-align: center;
+    padding: 15px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .stats {
+        gap: 8px;
+    }
+
+    .stat {
+        padding: 12px 9px;
+    }
+
+    .stat-number {
+        font-size: 21px;
+    }
+
+    .item-actions {
+        flex-wrap: wrap;
+    }
+
+    .item-action {
+        min-width: 30%;
+    }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
-<!-- HEADER -->
 
-<header class="topbar">
+<!-- ==================================================
+     HEADER
+================================================== -->
 
-  <div class="topbar-inner">
+<header class="header">
 
-    <div class="brand">
+    <div class="header-inner">
 
-      <div class="logo">
-        📦
-      </div>
+        <div class="brand">
 
-      <div>
-        <h1>BorrowBox</h1>
-        <p>Remember what you lent.</p>
-      </div>
+            <div class="logo">
+                📦
+            </div>
+
+            <div>
+                <h1>BorrowBox</h1>
+                <p>Remember what you lent.</p>
+            </div>
+
+        </div>
+
+        <button
+            class="theme-button"
+            id="headerThemeButton"
+            type="button">
+
+            🌙
+
+        </button>
 
     </div>
 
-    <button
-      class="theme-btn"
-      onclick="toggleTheme()"
-      id="themeBtn">
-      🌙
-    </button>
-
-  </div>
-
 </header>
+
 
 
 <main class="container">
 
 
-<!-- ================= HOME ================= -->
+<!-- ==================================================
+     HOME SCREEN
+================================================== -->
 
-<section id="homeScreen" class="screen active">
+<section
+    id="homeScreen"
+    class="screen active">
 
-  <button
-    class="primary-btn"
-    onclick="openModal()">
-    ＋ Add Lending
-  </button>
-
-
-  <div class="quick-actions">
 
     <button
-      class="quick-btn"
-      onclick="showScreen('activeScreen')">
-      📦 Active Lendings
+        class="primary-button"
+        id="addButton"
+        type="button">
+
+        ＋ Add Lending
+
     </button>
 
-    <button
-      class="quick-btn"
-      onclick="showScreen('historyScreen')">
-      📜 History
-    </button>
 
-  </div>
+    <div class="quick-buttons">
+
+        <button
+            class="quick-button"
+            id="activeButton"
+            type="button">
+
+            📦 Active Lendings
+
+        </button>
 
 
-  <section class="stats">
+        <button
+            class="quick-button"
+            id="historyButton"
+            type="button">
 
-    <div class="stat">
-      <div class="stat-icon">📦</div>
-      <div
-        class="stat-number"
-        id="activeCount">
-        0
-      </div>
-      <div class="stat-label">
-        Active
-      </div>
+            📜 History
+
+        </button>
+
     </div>
 
 
-    <div class="stat">
-      <div class="stat-icon">⏰</div>
-      <div
-        class="stat-number"
-        id="dueCount">
-        0
-      </div>
-      <div class="stat-label">
-        Due Soon
-      </div>
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                📦
+            </div>
+
+            <div
+                class="stat-number"
+                id="activeCount">
+
+                0
+
+            </div>
+
+            <div class="stat-label">
+                Active
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                ⏰
+            </div>
+
+            <div
+                class="stat-number"
+                id="dueCount">
+
+                0
+
+            </div>
+
+            <div class="stat-label">
+                Due Soon
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                ✅
+            </div>
+
+            <div
+                class="stat-number"
+                id="returnedCount">
+
+                0
+
+            </div>
+
+            <div class="stat-label">
+                Returned
+            </div>
+
+        </div>
+
     </div>
 
 
-    <div class="stat">
-      <div class="stat-icon">✅</div>
-      <div
-        class="stat-number"
-        id="returnedCount">
-        0
-      </div>
-      <div class="stat-label">
-        Returned
-      </div>
+    <!-- QUICK OVERVIEW -->
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2>
+                ⚡ Quick Overview
+            </h2>
+
+        </div>
+
+        <div id="overviewList"></div>
+
     </div>
 
-  </section>
 
+    <!-- MORE -->
 
-  <div class="card">
+    <div class="card">
 
-    <div class="card-title">
-      <h2>⚡ Quick Overview</h2>
+        <div class="card-title">
+
+            <h2>
+                ⚙️ More
+            </h2>
+
+        </div>
+
+        <button
+            class="secondary-button"
+            id="settingsButton"
+            type="button">
+
+            ⚙️ Settings
+
+        </button>
+
     </div>
 
-    <div
-      id="homeOverview">
+
+    <div class="footer">
+
+        BorrowBox • Your lending records stay on this device.
+
     </div>
-
-  </div>
-
-
-  <div class="card">
-
-    <div class="card-title">
-      <h2>⚙️ More</h2>
-    </div>
-
-    <button
-      class="secondary-btn"
-      onclick="showScreen('settingsScreen')">
-      ⚙️ Settings
-    </button>
-
-  </div>
-
-
-  <div class="footer">
-    BorrowBox • Your lending records stay on this device.
-  </div>
 
 </section>
 
 
 
-<!-- ================= ACTIVE ================= -->
+<!-- ==================================================
+     ACTIVE SCREEN
+================================================== -->
 
-<section id="activeScreen" class="screen">
+<section
+    id="activeScreen"
+    class="screen">
 
-  <div class="back-row">
 
-    <button
-      class="back-btn"
-      onclick="showScreen('homeScreen')">
-      ←
-    </button>
+    <div class="screen-header">
 
-    <div class="back-title">
-      Active Lendings
+        <button
+            class="back-button"
+            id="activeBackButton"
+            type="button">
+
+            ←
+
+        </button>
+
+        <div class="screen-title">
+            Active Lendings
+        </div>
+
     </div>
 
-  </div>
+
+    <div class="card">
+
+        <input
+            class="search-input"
+            id="searchInput"
+            type="search"
+            placeholder="🔍 Search person, item or note...">
 
 
-  <div class="card">
+        <div id="activeList"></div>
 
-    <input
-      class="search"
-      id="activeSearch"
-      placeholder="🔍 Search person, item or note..."
-      oninput="renderActive()"
-    >
-
-    <div id="activeList">
     </div>
-
-  </div>
 
 </section>
 
 
 
-<!-- ================= HISTORY ================= -->
+<!-- ==================================================
+     HISTORY SCREEN
+================================================== -->
 
-<section id="historyScreen" class="screen">
+<section
+    id="historyScreen"
+    class="screen">
 
-  <div class="back-row">
 
-    <button
-      class="back-btn"
-      onclick="showScreen('homeScreen')">
-      ←
-    </button>
+    <div class="screen-header">
 
-    <div class="back-title">
-      Returned History
+        <button
+            class="back-button"
+            id="historyBackButton"
+            type="button">
+
+            ←
+
+        </button>
+
+        <div class="screen-title">
+            Returned History
+        </div>
+
     </div>
 
-  </div>
 
+    <div class="card">
 
-  <div class="card">
+        <div id="historyList"></div>
 
-    <div id="historyList">
     </div>
-
-  </div>
 
 </section>
 
 
 
-<!-- ================= SETTINGS ================= -->
+<!-- ==================================================
+     SETTINGS SCREEN
+================================================== -->
 
-<section id="settingsScreen" class="screen">
-
-  <div class="back-row">
-
-    <button
-      class="back-btn"
-      onclick="showScreen('homeScreen')">
-      ←
-    </button>
-
-    <div class="back-title">
-      Settings
-    </div>
-
-  </div>
+<section
+    id="settingsScreen"
+    class="screen">
 
 
-  <div class="card">
+    <div class="screen-header">
 
-    <div class="setting-row">
+        <button
+            class="back-button"
+            id="settingsBackButton"
+            type="button">
 
-      <div class="setting-info">
-        <strong>🌙 Dark Mode</strong>
-        <span>Change the appearance of BorrowBox.</span>
-      </div>
+            ←
 
-      <button
-        class="theme-btn"
-        style="background:var(--bg);color:var(--text);border-color:var(--border)"
-        onclick="toggleTheme()">
-        🌙
-      </button>
+        </button>
+
+        <div class="screen-title">
+            Settings
+        </div>
 
     </div>
 
 
-    <div class="setting-row">
+    <!-- APPEARANCE -->
 
-      <div class="setting-info">
-        <strong>💾 Local Storage</strong>
-        <span>Your records are saved on this device.</span>
-      </div>
+    <div class="card">
 
-      <span>✓</span>
+        <div class="card-title">
+
+            <h2>
+                🎨 Appearance
+            </h2>
+
+        </div>
+
+
+        <div class="setting-row">
+
+            <div class="setting-text">
+
+                <strong>
+                    🌙 Dark Mode
+                </strong>
+
+                <span>
+                    Change BorrowBox appearance.
+                </span>
+
+            </div>
+
+
+            <button
+                class="small-button"
+                id="settingsThemeButton"
+                type="button">
+
+                🌙
+
+            </button>
+
+        </div>
 
     </div>
 
 
-    <div class="setting-row">
 
-      <div class="setting-info">
-        <strong>📦 Total Records</strong>
-        <span>All lending records stored in BorrowBox.</span>
-      </div>
+    <!-- LENDING -->
 
-      <strong id="totalRecords">
-        0
-      </strong>
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2>
+                📅 Lending
+            </h2>
+
+        </div>
+
+
+        <div class="setting-row">
+
+            <div class="setting-text">
+
+                <strong>
+                    Default Return Period
+                </strong>
+
+                <span>
+                    Automatically set a due date when adding a lending.
+                </span>
+
+            </div>
+
+
+            <select
+                id="defaultPeriod"
+                style="width:auto">
+
+                <option value="0">
+                    None
+                </option>
+
+                <option value="7">
+                    7 Days
+                </option>
+
+                <option value="14">
+                    14 Days
+                </option>
+
+                <option value="30">
+                    30 Days
+                </option>
+
+            </select>
+
+        </div>
 
     </div>
 
 
-    <button
-      class="danger-btn"
-      onclick="clearAllData()">
-      🗑️ Delete All Data
-    </button>
 
-  </div>
+    <!-- DATA -->
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2>
+                💾 Data
+            </h2>
+
+        </div>
+
+
+        <div class="setting-row">
+
+            <div class="setting-text">
+
+                <strong>
+                    Total Records
+                </strong>
+
+                <span>
+                    All records currently stored.
+                </span>
+
+            </div>
+
+
+            <strong id="totalRecords">
+                0
+            </strong>
+
+        </div>
+
+
+        <button
+            class="secondary-button"
+            id="exportButton"
+            type="button">
+
+            📤 Export Backup
+
+        </button>
+
+
+        <br><br>
+
+
+        <button
+            class="secondary-button"
+            id="importButton"
+            type="button">
+
+            📥 Import Backup
+
+        </button>
+
+
+        <input
+            type="file"
+            id="importFile"
+            accept=".json"
+            hidden>
+
+
+        <button
+            class="danger-button"
+            id="clearButton"
+            type="button">
+
+            🗑️ Delete All Data
+
+        </button>
+
+    </div>
+
+
+
+    <!-- ABOUT -->
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2>
+                ℹ️ About
+            </h2>
+
+        </div>
+
+
+        <div class="about-box">
+
+            <div class="about-logo">
+                📦
+            </div>
+
+
+            <h2>
+                BorrowBox
+            </h2>
+
+
+            <p>
+                A simple personal lending tracker
+                that helps you remember what you
+                have lent to others.
+            </p>
+
+
+            <div class="creator">
+
+                Created by
+
+                <strong>
+                    Pijush Mandal
+                </strong>
+
+                <div
+                    class="person"
+                    style="margin-top:8px">
+
+                    Made with ❤️ in India
+
+                </div>
+
+            </div>
+
+
+            <p>
+                Version 1.0.0
+            </p>
+
+        </div>
+
+    </div>
+
 
 </section>
+
 
 </main>
 
 
 
-<!-- ================= ADD / EDIT MODAL ================= -->
+<!-- ==================================================
+     ADD / EDIT MODAL
+================================================== -->
 
 <div
-  class="modal-bg"
-  id="modalBg">
+    class="modal-overlay"
+    id="modalOverlay">
 
-  <div class="modal">
 
+    <div class="modal">
 
-    <div class="modal-header">
 
-      <button
-        class="modal-back"
-        onclick="closeModal()">
-        ←
-      </button>
+        <div class="modal-header">
 
-      <h2 id="modalTitle">
-        ➕ Add Lending
-      </h2>
+            <button
+                class="modal-back"
+                id="modalBackButton"
+                type="button">
 
-    </div>
+                ←
 
+            </button>
 
-    <label>
-      What did you lend?
-    </label>
 
+            <h2 id="modalTitle">
+                ➕ Add Lending
+            </h2>
 
-    <div class="type-buttons">
-
-      <button
-        class="type-btn active"
-        id="itemTypeBtn"
-        onclick="setType('item')">
-        📦 Item
-      </button>
-
-
-      <button
-        class="type-btn"
-        id="moneyTypeBtn"
-        onclick="setType('money')">
-        💰 Money
-      </button>
-
-    </div>
-
-
-    <label>
-      Person name *
-    </label>
-
-    <input
-      id="person"
-      placeholder="e.g. Rahul"
-    >
-
-
-    <label id="thingLabel">
-      Item *
-    </label>
-
-    <input
-      id="thing"
-      placeholder="e.g. Power Bank"
-    >
-
-
-    <label>
-      Given date
-    </label>
-
-    <input
-      id="givenDate"
-      type="date"
-    >
-
-
-    <label>
-      Return / repayment date
-    </label>
-
-    <input
-      id="dueDate"
-      type="date"
-    >
-
-
-    <label>
-      Note
-    </label>
-
-    <textarea
-      id="note"
-      placeholder="Optional note..."
-    ></textarea>
-
-
-    <div class="modal-actions">
-
-      <button
-        class="cancel"
-        onclick="closeModal()">
-        Cancel
-      </button>
-
-      <button
-        class="save"
-        onclick="saveLending()">
-        Save
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-
-<script>
-
-/* ================= DATA ================= */
-
-let records =
-  JSON.parse(
-    localStorage.getItem("borrowbox_records")
-  ) || [];
-
-let editingId = null;
-
-let currentType = "item";
-
-
-/* ================= BASIC FUNCTIONS ================= */
-
-function today(){
-
-  return new Date()
-    .toISOString()
-    .split("T")[0];
-
-}
-
-
-function saveData(){
-
-  localStorage.setItem(
-    "borrowbox_records",
-    JSON.stringify(records)
-  );
-
-}
-
-
-function escapeHTML(value){
-
-  const div =
-    document.createElement("div");
-
-  div.textContent =
-    value ?? "";
-
-  return div.innerHTML;
-
-}
-
-
-function formatDate(date){
-
-  if(!date)
-    return "Not set";
-
-  const d =
-    new Date(date + "T00:00:00");
-
-  return d.toLocaleDateString(
-    undefined,
-    {
-      day:"numeric",
-      month:"short",
-      year:"numeric"
-    }
-  );
-
-}
-
-
-/* ================= SCREEN NAVIGATION ================= */
-
-function showScreen(screenId){
-
-  const screens =
-    document.querySelectorAll(".screen");
-
-  screens.forEach(screen => {
-    screen.classList.remove("active");
-  });
-
-  const target =
-    document.getElementById(screenId);
-
-  if(target){
-    target.classList.add("active");
-  }
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-  renderAll();
-
-}
-
-
-/* ================= MODAL ================= */
-
-function openModal(id = null){
-
-  editingId = id;
-
-  document.getElementById(
-    "modalBg"
-  ).style.display = "flex";
-
-
-  if(id){
-
-    const record =
-      records.find(
-        r => r.id === id
-      );
-
-    if(!record)
-      return;
-
-
-    document.getElementById(
-      "modalTitle"
-    ).textContent =
-      "✏️ Edit Lending";
-
-
-    document.getElementById(
-      "person"
-    ).value =
-      record.person;
-
-
-    document.getElementById(
-      "thing"
-    ).value =
-      record.thing;
-
-
-    document.getElementById(
-      "givenDate"
-    ).value =
-      record.givenDate;
-
-
-    document.getElementById(
-      "dueDate"
-    ).value =
-      record.dueDate || "";
-
-
-    document.getElementById(
-      "note"
-    ).value =
-      record.note || "";
-
-
-    setType(record.type);
-
-  }else{
-
-    document.getElementById(
-      "modalTitle"
-    ).textContent =
-      "➕ Add Lending";
-
-
-    document.getElementById(
-      "person"
-    ).value = "";
-
-
-    document.getElementById(
-      "thing"
-    ).value = "";
-
-
-    document.getElementById(
-      "givenDate"
-    ).value =
-      today();
-
-
-    document.getElementById(
-      "dueDate"
-    ).value = "";
-
-
-    document.getElementById(
-      "note"
-    ).value = "";
-
-
-    setType("item");
-
-  }
-
-}
-
-
-function closeModal(){
-
-  document.getElementById(
-    "modalBg"
-  ).style.display = "none";
-
-  editingId = null;
-
-}
-
-
-/* ================= TYPE ================= */
-
-function setType(type){
-
-  currentType = type;
-
-  const itemBtn =
-    document.getElementById(
-      "itemTypeBtn"
-    );
-
-  const moneyBtn =
-    document.getElementById(
-      "moneyTypeBtn"
-    );
-
-  const label =
-    document.getElementById(
-      "thingLabel"
-    );
-
-  const input =
-    document.getElementById(
-      "thing"
-    );
-
-
-  itemBtn.classList.toggle(
-    "active",
-    type === "item"
-  );
-
-
-  moneyBtn.classList.toggle(
-    "active",
-    type === "money"
-  );
-
-
-  if(type === "money"){
-
-    label.textContent =
-      "Amount *";
-
-    input.placeholder =
-      "e.g. ₹500";
-
-  }else{
-
-    label.textContent =
-      "Item *";
-
-    input.placeholder =
-      "e.g. Power Bank";
-
-  }
-
-}
-
-
-/* ================= SAVE ================= */
-
-function saveLending(){
-
-  const person =
-    document.getElementById(
-      "person"
-    ).value.trim();
-
-
-  const thing =
-    document.getElementById(
-      "thing"
-    ).value.trim();
-
-
-  const givenDate =
-    document.getElementById(
-      "givenDate"
-    ).value;
-
-
-  const dueDate =
-    document.getElementById(
-      "dueDate"
-    ).value;
-
-
-  const note =
-    document.getElementById(
-      "note"
-    ).value.trim();
-
-
-  if(!person || !thing){
-
-    alert(
-      "Please enter the person name and item/amount."
-    );
-
-    return;
-
-  }
-
-
-  if(editingId){
-
-    const record =
-      records.find(
-        r => r.id === editingId
-      );
-
-
-    if(record){
-
-      record.person =
-        person;
-
-      record.thing =
-        thing;
-
-      record.givenDate =
-        givenDate;
-
-      record.dueDate =
-        dueDate;
-
-      record.note =
-        note;
-
-      record.type =
-        currentType;
-
-    }
-
-  }else{
-
-    records.unshift({
-
-      id:Date.now(),
-
-      person:person,
-
-      thing:thing,
-
-      givenDate:givenDate,
-
-      dueDate:dueDate,
-
-      note:note,
-
-      type:currentType,
-
-      returned:false,
-
-      returnedDate:""
-
-    });
-
-  }
-
-
-  saveData();
-
-  closeModal();
-
-  renderAll();
-
-}
-
-
-/* ================= DATE STATUS ================= */
-
-function isDueSoon(record){
-
-  if(!record.dueDate)
-    return false;
-
-
-  const now =
-    new Date();
-
-
-  const todayDate =
-    new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate()
-    );
-
-
-  const due =
-    new Date(
-      record.dueDate + "T00:00:00"
-    );
-
-
-  const diff =
-    Math.ceil(
-      (due - todayDate) /
-      (1000 * 60 * 60 * 24)
-    );
-
-
-  return diff >= 0 && diff <= 3;
-
-}
-
-
-function isOverdue(record){
-
-  if(!record.dueDate)
-    return false;
-
-
-  const now =
-    new Date();
-
-
-  const todayDate =
-    new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate()
-    );
-
-
-  const due =
-    new Date(
-      record.dueDate + "T00:00:00"
-    );
-
-
-  return due < todayDate;
-
-}
-
-
-function statusBadge(record){
-
-  if(isOverdue(record)){
-
-    return `
-      <span class="badge badge-overdue">
-        OVERDUE
-      </span>
-    `;
-
-  }
-
-
-  if(isDueSoon(record)){
-
-    return `
-      <span class="badge badge-due">
-        DUE SOON
-      </span>
-    `;
-
-  }
-
-
-  return "";
-
-}
-
-
-/* ================= RETURN ================= */
-
-function markReturned(id){
-
-  const record =
-    records.find(
-      r => r.id === id
-    );
-
-
-  if(!record)
-    return;
-
-
-  record.returned = true;
-
-  record.returnedDate =
-    today();
-
-
-  saveData();
-
-  renderAll();
-
-}
-
-
-/* ================= DELETE ================= */
-
-function deleteRecord(id){
-
-  const record =
-    records.find(
-      r => r.id === id
-    );
-
-
-  if(!record)
-    return;
-
-
-  const ok =
-    confirm(
-      `Delete "${record.thing}" lent to ${record.person}?`
-    );
-
-
-  if(!ok)
-    return;
-
-
-  records =
-    records.filter(
-      r => r.id !== id
-    )
+        </div>
