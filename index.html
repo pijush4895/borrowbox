@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111827">
+<title>BorrowBox</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f7fb;
+  color:#111827;
+}
+header{
+  background:#111827;
+  color:white;
+  padding:24px 18px;
+  border-radius:0 0 24px 24px;
+}
+header h1{margin:0;font-size:28px}
+header p{margin:6px 0 0;color:#cbd5e1}
+
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:20px 16px 40px;
+}
+
+.card{
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:16px;
+  box-shadow:0 4px 15px rgba(0,0,0,.06);
+}
+
+.add-btn{
+  width:100%;
+  border:0;
+  background:#2563eb;
+  color:white;
+  padding:16px;
+  border-radius:14px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+h2{font-size:19px;margin-top:0}
+
+input{
+  width:100%;
+  padding:13px;
+  margin:7px 0 12px;
+  border:1px solid #d1d5db;
+  border-radius:10px;
+  font-size:15px;
+}
+
+.save-btn{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:10px;
+  background:#16a34a;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.item{
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:14px;
+  margin-top:10px;
+}
+
+.item strong{font-size:17px}
+
+.small{
+  color:#6b7280;
+  font-size:13px;
+  margin-top:5px;
+}
+
+.return-btn{
+  margin-top:10px;
+  padding:9px 12px;
+  border:0;
+  border-radius:8px;
+  background:#e5e7eb;
+  cursor:pointer;
+}
+
+.empty{
+  color:#6b7280;
+  text-align:center;
+  padding:15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <h1>📦 BorrowBox</h1>
+    <p>Remember what you lent.</p>
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="card">
+    <button class="add-btn" onclick="showForm()">
+      + I GAVE SOMETHING
+    </button>
+  </div>
+
+  <div class="card" id="formCard" style="display:none">
+    <h2>➕ Add Lending</h2>
+
+    <input id="person" placeholder="Person name">
+    <input id="item" placeholder="What did you give?">
+    <input id="date" type="date">
+    <input id="returnDate" type="date">
+
+    <button class="save-btn" onclick="saveLending()">
+      Save Lending
+    </button>
+  </div>
+
+  <div class="card">
+    <h2>📦 Active Lendings</h2>
+    <div id="activeList"></div>
+  </div>
+
+  <div class="card">
+    <h2>📜 Returned History</h2>
+    <div id="historyList"></div>
+  </div>
+
+</main>
+
+<script>
+
+let lendings =
+JSON.parse(localStorage.getItem("borrowbox")) || [];
+
+document.getElementById("date").value =
+new Date().toISOString().split("T")[0];
+
+function showForm(){
+  document.getElementById("formCard").style.display="block";
+  document.getElementById("person").focus();
+}
+
+function saveLending(){
+
+  const person=document.getElementById("person").value.trim();
+  const item=document.getElementById("item").value.trim();
+  const date=document.getElementById("date").value;
+  const returnDate=document.getElementById("returnDate").value;
+
+  if(!person || !item){
+    alert("Please enter person name and item.");
+    return;
+  }
+
+  lendings.unshift({
+    id:Date.now(),
+    person:person,
+    item:item,
+    date:date,
+    returnDate:returnDate,
+    returned:false
+  });
+
+  saveData();
+
+  document.getElementById("person").value="";
+  document.getElementById("item").value="";
+  document.getElementById("returnDate").value="";
+  document.getElementById("formCard").style.display="none";
+
+  render();
+}
+
+function markReturned(id){
+
+  const found=lendings.find(x=>x.id===id);
+
+  if(found){
+    found.returned=true;
+    found.returnedDate=
+      new Date().toISOString().split("T")[0];
+  }
+
+  saveData();
+  render();
+}
+
+function saveData(){
+  localStorage.setItem(
+    "borrowbox",
+    JSON.stringify(lendings)
+  );
+}
+
+function render(){
+
+  const active=document.getElementById("activeList");
+  const history=document.getElementById("historyList");
+
+  const activeItems=lendings.filter(x=>!x.returned);
+  const returnedItems=lendings.filter(x=>x.returned);
+
+  if(activeItems.length===0){
+    active.innerHTML=
+      '<div class="empty">No active lendings yet.</div>';
+  }else{
+
+    active.innerHTML=activeItems.map(x=>`
+
+      <div class="item">
+        <strong>${escapeHTML(x.item)}</strong>
+
+        <div class="small">
+          Given to: ${escapeHTML(x.person)}
+        </div>
+
+        <div class="small">
+          Given: ${x.date || "Not specified"}
+        </div>
+
+        ${
+          x.returnDate
+          ? `<div class="small">
+               Return date: ${x.returnDate}
+             </div>`
+          : ""
+        }
+
+        <button class="return-btn"
+          onclick="markReturned(${x.id})">
+          ✓ Mark as Returned
+        </button>
+      </div>
+
+    `).join("");
+  }
+
+  if(returnedItems.length===0){
+    history.innerHTML=
+      '<div class="empty">No returned items yet.</div>';
+  }else{
+
+    history.innerHTML=returnedItems.map(x=>`
+
+      <div class="item">
+        <strong>${escapeHTML(x.item)}</strong>
+
+        <div class="small">
+          ${escapeHTML(x.person)}
+        </div>
+
+        <div class="small">
+          Returned: ${x.returnedDate || ""}
+        </div>
+      </div>
+
+    `).join("");
+  }
+}
+
+function escapeHTML(text){
+  const div=document.createElement("div");
+  div.textContent=text;
+  return div.innerHTML;
+}
+
+render();
+
+</script>
+
+</body>
+</html>
