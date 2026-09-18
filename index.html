@@ -2,21 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<meta name="theme-color"
-      content="#172554">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#172554">
 <title>BorrowBox</title>
 
 <style>
-
 /* =========================
    VARIABLES
 ========================= */
-
 :root {
     --bg: #f5f7fb;
     --card: #ffffff;
@@ -40,54 +33,32 @@ body.dark {
     --shadow: 0 8px 25px rgba(0,0,0,0.25);
 }
 
-
 /* =========================
    BASIC
 ========================= */
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     transition: background 0.2s, color 0.2s;
 }
 
-button,
-input,
-select,
-textarea {
-    font-family: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-button:active {
-    transform: scale(0.98);
-}
-
+button, input, select, textarea { font-family: inherit; }
+button { cursor: pointer; border: none; outline: none; }
+button:active { transform: scale(0.98); }
 
 /* =========================
    HEADER
 ========================= */
-
 .header {
     background: linear-gradient(135deg, #0f172a, #1d4ed8);
     color: white;
     padding: 22px 16px 26px;
     border-radius: 0 0 28px 28px;
 }
-
 .header-inner {
     max-width: 850px;
     margin: auto;
@@ -95,13 +66,7 @@ button:active {
     align-items: center;
     justify-content: space-between;
 }
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
+.brand { display: flex; align-items: center; gap: 12px; }
 .logo {
     width: 48px;
     height: 48px;
@@ -112,18 +77,8 @@ button:active {
     justify-content: center;
     font-size: 25px;
 }
-
-.brand h1 {
-    margin: 0;
-    font-size: 25px;
-}
-
-.brand p {
-    margin: 4px 0 0;
-    font-size: 13px;
-    color: #dbeafe;
-}
-
+.brand h1 { margin: 0; font-size: 24px; }
+.brand p { margin: 4px 0 0; font-size: 13px; color: #dbeafe; }
 .theme-button {
     width: 43px;
     height: 43px;
@@ -134,33 +89,27 @@ button:active {
     font-size: 19px;
 }
 
-
 /* =========================
    MAIN
 ========================= */
-
 .container {
     max-width: 850px;
     margin: auto;
     padding: 20px 16px 50px;
 }
+.screen { display: none; }
+.screen.active { display: block; animation: fadeIn 0.2s ease-in; }
 
-.screen {
-    display: none;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-
-.screen.active {
-    display: block;
-}
-
 
 /* =========================
    BUTTONS
 ========================= */
-
 .primary-button {
     width: 100%;
-    border: 0;
     border-radius: 15px;
     padding: 16px;
     background: var(--primary);
@@ -169,11 +118,7 @@ button:active {
     font-weight: bold;
     box-shadow: 0 6px 18px rgba(37,99,235,0.20);
 }
-
-.primary-button:hover {
-    background: var(--primary-dark);
-}
-
+.primary-button:hover { background: var(--primary-dark); }
 .secondary-button {
     width: 100%;
     padding: 14px;
@@ -184,18 +129,15 @@ button:active {
     font-weight: bold;
 }
 
-
 /* =========================
    QUICK BUTTONS
 ========================= */
-
 .quick-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
     margin-top: 14px;
 }
-
 .quick-button {
     padding: 15px 10px;
     border-radius: 14px;
@@ -206,18 +148,15 @@ button:active {
     box-shadow: var(--shadow);
 }
 
-
 /* =========================
    STATS
 ========================= */
-
 .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     margin: 18px 0;
 }
-
 .stat {
     background: var(--card);
     border: 1px solid var(--border);
@@ -225,28 +164,13 @@ button:active {
     padding: 16px;
     box-shadow: var(--shadow);
 }
-
-.stat-icon {
-    font-size: 21px;
-}
-
-.stat-number {
-    margin-top: 6px;
-    font-size: 25px;
-    font-weight: 800;
-}
-
-.stat-label {
-    margin-top: 2px;
-    color: var(--muted);
-    font-size: 12px;
-}
-
+.stat-icon { font-size: 21px; }
+.stat-number { margin-top: 6px; font-size: 24px; font-weight: 800; }
+.stat-label { margin-top: 2px; color: var(--muted); font-size: 12px; }
 
 /* =========================
    CARDS
 ========================= */
-
 .card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -255,31 +179,23 @@ button:active {
     margin-bottom: 16px;
     box-shadow: var(--shadow);
 }
-
 .card-title {
     display: flex;
     align-items: center;
     gap: 8px;
     margin-bottom: 14px;
 }
-
-.card-title h2 {
-    margin: 0;
-    font-size: 18px;
-}
-
+.card-title h2 { margin: 0; font-size: 18px; }
 
 /* =========================
    SCREEN HEADER
 ========================= */
-
 .screen-header {
     display: flex;
     align-items: center;
     gap: 12px;
     margin-bottom: 16px;
 }
-
 .back-button {
     width: 43px;
     height: 43px;
@@ -287,20 +203,14 @@ button:active {
     border: 1px solid var(--border);
     background: var(--card);
     color: var(--text);
-    font-size: 22px;
+    font-size: 20px;
     box-shadow: var(--shadow);
 }
-
-.screen-title {
-    font-size: 20px;
-    font-weight: 800;
-}
-
+.screen-title { font-size: 20px; font-weight: 800; }
 
 /* =========================
    SEARCH
 ========================= */
-
 .search-input {
     width: 100%;
     padding: 13px 15px;
@@ -312,47 +222,24 @@ button:active {
     margin-bottom: 13px;
 }
 
-.search-input:focus,
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: var(--primary);
-}
-
-
 /* =========================
    LENDING ITEM
 ========================= */
-
 .lending-item {
     border: 1px solid var(--border);
     border-radius: 15px;
     padding: 15px;
     margin-top: 10px;
+    background: var(--card);
 }
-
 .item-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 10px;
 }
-
-.item-name {
-    font-size: 17px;
-    font-weight: 800;
-}
-
-.person {
-    color: var(--muted);
-    font-size: 13px;
-    margin-top: 5px;
-}
-
-.badges {
-    text-align: right;
-}
-
+.item-name { font-size: 17px; font-weight: 800; }
+.person { color: var(--muted); font-size: 13px; margin-top: 5px; }
 .badge {
     display: inline-block;
     padding: 5px 9px;
@@ -361,31 +248,11 @@ textarea:focus {
     font-weight: 800;
     margin-bottom: 4px;
 }
-
-.badge-item {
-    background: #dbeafe;
-    color: #1d4ed8;
-}
-
-.badge-money {
-    background: #dcfce7;
-    color: #15803d;
-}
-
-.badge-due {
-    background: #ffedd5;
-    color: #c2410c;
-}
-
-.badge-overdue {
-    background: #fee2e2;
-    color: #b91c1c;
-}
-
-.badge-returned {
-    background: #dcfce7;
-    color: #166534;
-}
+.badge-item { background: #dbeafe; color: #1d4ed8; }
+.badge-money { background: #dcfce7; color: #15803d; }
+.badge-due { background: #ffedd5; color: #c2410c; }
+.badge-overdue { background: #fee2e2; color: #b91c1c; }
+.badge-returned { background: #dcfce7; color: #166534; }
 
 .details {
     display: grid;
@@ -393,61 +260,34 @@ textarea:focus {
     gap: 8px;
     margin-top: 12px;
 }
-
 .detail {
     background: var(--bg);
     padding: 9px;
     border-radius: 10px;
     font-size: 12px;
 }
-
-.detail span {
-    display: block;
-    color: var(--muted);
-    margin-bottom: 3px;
-}
-
-.note {
-    color: var(--muted);
-    font-size: 13px;
-    margin-top: 10px;
-}
+.detail span { display: block; color: var(--muted); margin-bottom: 3px; }
+.note { color: var(--muted); font-size: 13px; margin-top: 10px; }
 
 .item-actions {
     display: flex;
     gap: 8px;
     margin-top: 12px;
 }
-
 .item-action {
     flex: 1;
-    border: 0;
     padding: 10px 7px;
     border-radius: 10px;
     font-size: 12px;
     font-weight: 800;
 }
-
-.return-button {
-    background: #dcfce7;
-    color: #166534;
-}
-
-.edit-button {
-    background: #dbeafe;
-    color: #1d4ed8;
-}
-
-.delete-button {
-    background: #fee2e2;
-    color: #b91c1c;
-}
-
+.return-button { background: #dcfce7; color: #166534; }
+.edit-button { background: #dbeafe; color: #1d4ed8; }
+.delete-button { background: #fee2e2; color: #b91c1c; }
 
 /* =========================
    EMPTY
 ========================= */
-
 .empty {
     text-align: center;
     color: var(--muted);
@@ -455,11 +295,9 @@ textarea:focus {
     font-size: 14px;
 }
 
-
 /* =========================
    MODAL
 ========================= */
-
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -470,11 +308,7 @@ textarea:focus {
     padding: 16px;
     background: rgba(0,0,0,0.60);
 }
-
-.modal-overlay.show {
-    display: flex;
-}
-
+.modal-overlay.show { display: flex; }
 .modal {
     width: 100%;
     max-width: 500px;
@@ -485,19 +319,13 @@ textarea:focus {
     background: var(--card);
     color: var(--text);
 }
-
 .modal-header {
     display: flex;
     align-items: center;
     gap: 12px;
     margin-bottom: 18px;
 }
-
-.modal-header h2 {
-    margin: 0;
-    font-size: 20px;
-}
-
+.modal-header h2 { margin: 0; font-size: 20px; }
 .modal-back {
     width: 40px;
     height: 40px;
@@ -507,17 +335,13 @@ textarea:focus {
     color: var(--text);
     font-size: 20px;
 }
-
 label {
     display: block;
     margin: 13px 0 6px;
     font-size: 13px;
     font-weight: bold;
 }
-
-input,
-select,
-textarea {
+input, select, textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid var(--border);
@@ -526,18 +350,16 @@ textarea {
     background: var(--bg);
     color: var(--text);
 }
-
-textarea {
-    min-height: 80px;
-    resize: vertical;
+input:focus, select:focus, textarea:focus {
+    border-color: var(--primary);
 }
+textarea { min-height: 80px; resize: vertical; }
 
 .type-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
-
 .type-button {
     padding: 12px;
     border: 1px solid var(--border);
@@ -546,42 +368,28 @@ textarea {
     color: var(--text);
     font-weight: bold;
 }
-
 .type-button.selected {
     background: #dbeafe;
     border-color: var(--primary);
     color: #1d4ed8;
 }
-
 .modal-actions {
     display: flex;
     gap: 10px;
-    margin-top: 18px;
+    margin-top: 20px;
 }
-
 .modal-actions button {
     flex: 1;
     padding: 13px;
-    border: 0;
     border-radius: 11px;
     font-weight: bold;
 }
-
-.cancel-button {
-    background: var(--border);
-    color: var(--text);
-}
-
-.save-button {
-    background: var(--primary);
-    color: white;
-}
-
+.cancel-button { background: var(--border); color: var(--text); }
+.save-button { background: var(--primary); color: white; }
 
 /* =========================
    SETTINGS
 ========================= */
-
 .setting-row {
     display: flex;
     align-items: center;
@@ -590,23 +398,9 @@ textarea {
     padding: 15px 0;
     border-bottom: 1px solid var(--border);
 }
-
-.setting-row:last-child {
-    border-bottom: 0;
-}
-
-.setting-text strong {
-    display: block;
-    font-size: 15px;
-}
-
-.setting-text span {
-    display: block;
-    margin-top: 4px;
-    color: var(--muted);
-    font-size: 12px;
-}
-
+.setting-row:last-child { border-bottom: 0; }
+.setting-text strong { display: block; font-size: 15px; }
+.setting-text span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
 .small-button {
     padding: 9px 12px;
     border: 1px solid var(--border);
@@ -615,28 +409,20 @@ textarea {
     color: var(--text);
     font-weight: bold;
 }
-
 .danger-button {
     width: 100%;
     margin-top: 15px;
     padding: 13px;
-    border: 0;
     border-radius: 11px;
     background: #fee2e2;
     color: #b91c1c;
     font-weight: bold;
 }
 
-
 /* =========================
-   ABOUT
+   ABOUT & FOOTER
 ========================= */
-
-.about-box {
-    text-align: center;
-    padding: 15px 5px;
-}
-
+.about-box { text-align: center; padding: 15px 5px; }
 .about-logo {
     width: 70px;
     height: 70px;
@@ -648,658 +434,285 @@ textarea {
     background: linear-gradient(135deg,#172554,#2563eb);
     font-size: 35px;
 }
-
-.about-box h2 {
-    margin: 14px 0 5px;
-}
-
-.about-box p {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.6;
-}
-
+.about-box h2 { margin: 14px 0 5px; }
+.about-box p { color: var(--muted); font-size: 13px; line-height: 1.6; }
 .creator {
     margin-top: 18px;
     padding: 15px;
     border-radius: 14px;
     background: var(--bg);
 }
-
-.creator strong {
-    display: block;
-    font-size: 18px;
-    margin-top: 5px;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer {
-    text-align: center;
-    padding: 15px;
-    color: var(--muted);
-    font-size: 12px;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
+.creator strong { display: block; font-size: 18px; margin-top: 5px; }
+.footer { text-align: center; padding: 15px; color: var(--muted); font-size: 12px; }
 
 @media (max-width: 600px) {
-
-    .stats {
-        gap: 8px;
-    }
-
-    .stat {
-        padding: 12px 9px;
-    }
-
-    .stat-number {
-        font-size: 21px;
-    }
-
-    .item-actions {
-        flex-wrap: wrap;
-    }
-
-    .item-action {
-        min-width: 30%;
-    }
-
+    .stats { gap: 8px; }
+    .stat { padding: 12px 9px; }
+    .stat-number { font-size: 21px; }
+    .item-actions { flex-wrap: wrap; }
+    .item-action { min-width: 30%; }
 }
-
 </style>
 </head>
 
-
 <body>
 
-
-<!-- ==================================================
-     HEADER
-================================================== -->
-
+<!-- HEADER -->
 <header class="header">
-
     <div class="header-inner">
-
         <div class="brand">
-
-            <div class="logo">
-                📦
-            </div>
-
+            <div class="logo">📦</div>
             <div>
                 <h1>BorrowBox</h1>
                 <p>Remember what you lent.</p>
             </div>
-
         </div>
-
-        <button
-            class="theme-button"
-            id="headerThemeButton"
-            type="button">
-
-            🌙
-
-        </button>
-
+        <button class="theme-button" id="headerThemeButton" type="button">🌙</button>
     </div>
-
 </header>
-
-
 
 <main class="container">
 
-
-<!-- ==================================================
-     HOME SCREEN
-================================================== -->
-
-<section
-    id="homeScreen"
-    class="screen active">
-
-
-    <button
-        class="primary-button"
-        id="addButton"
-        type="button">
-
-        ＋ Add Lending
-
-    </button>
-
+<!-- HOME SCREEN -->
+<section id="homeScreen" class="screen active">
+    <button class="primary-button" id="addButton" type="button">＋ Add Lending</button>
 
     <div class="quick-buttons">
-
-        <button
-            class="quick-button"
-            id="activeButton"
-            type="button">
-
-            📦 Active Lendings
-
-        </button>
-
-
-        <button
-            class="quick-button"
-            id="historyButton"
-            type="button">
-
-            📜 History
-
-        </button>
-
+        <button class="quick-button" id="activeButton" type="button">📦 Active Lendings</button>
+        <button class="quick-button" id="historyButton" type="button">📜 History</button>
     </div>
-
-
-    <!-- STATS -->
 
     <div class="stats">
-
         <div class="stat">
-
-            <div class="stat-icon">
-                📦
-            </div>
-
-            <div
-                class="stat-number"
-                id="activeCount">
-
-                0
-
-            </div>
-
-            <div class="stat-label">
-                Active
-            </div>
-
+            <div class="stat-icon">📦</div>
+            <div class="stat-number" id="activeCount">0</div>
+            <div class="stat-label">Active</div>
         </div>
-
-
         <div class="stat">
-
-            <div class="stat-icon">
-                ⏰
-            </div>
-
-            <div
-                class="stat-number"
-                id="dueCount">
-
-                0
-
-            </div>
-
-            <div class="stat-label">
-                Due Soon
-            </div>
-
+            <div class="stat-icon">⏰</div>
+            <div class="stat-number" id="dueCount">0</div>
+            <div class="stat-label">Due Soon</div>
         </div>
-
-
         <div class="stat">
-
-            <div class="stat-icon">
-                ✅
-            </div>
-
-            <div
-                class="stat-number"
-                id="returnedCount">
-
-                0
-
-            </div>
-
-            <div class="stat-label">
-                Returned
-            </div>
-
+            <div class="stat-icon">✅</div>
+            <div class="stat-number" id="returnedCount">0</div>
+            <div class="stat-label">Returned</div>
         </div>
-
     </div>
 
-
-    <!-- QUICK OVERVIEW -->
-
     <div class="card">
-
         <div class="card-title">
-
-            <h2>
-                ⚡ Quick Overview
-            </h2>
-
+            <h2>⚡ Quick Overview</h2>
         </div>
-
         <div id="overviewList"></div>
-
     </div>
-
-
-    <!-- MORE -->
 
     <div class="card">
-
         <div class="card-title">
-
-            <h2>
-                ⚙️ More
-            </h2>
-
+            <h2>⚙️ More</h2>
         </div>
-
-        <button
-            class="secondary-button"
-            id="settingsButton"
-            type="button">
-
-            ⚙️ Settings
-
-        </button>
-
+        <button class="secondary-button" id="settingsButton" type="button">⚙️ Settings</button>
     </div>
 
-
-    <div class="footer">
-
-        BorrowBox • Your lending records stay on this device.
-
-    </div>
-
+    <div class="footer">BorrowBox • Your lending records stay on this device.</div>
 </section>
 
-
-
-<!-- ==================================================
-     ACTIVE SCREEN
-================================================== -->
-
-<section
-    id="activeScreen"
-    class="screen">
-
-
+<!-- ACTIVE SCREEN -->
+<section id="activeScreen" class="screen">
     <div class="screen-header">
-
-        <button
-            class="back-button"
-            id="activeBackButton"
-            type="button">
-
-            ←
-
-        </button>
-
-        <div class="screen-title">
-            Active Lendings
-        </div>
-
+        <button class="back-button" id="activeBackButton" type="button">←</button>
+        <div class="screen-title">Active Lendings</div>
     </div>
-
-
     <div class="card">
-
-        <input
-            class="search-input"
-            id="searchInput"
-            type="search"
-            placeholder="🔍 Search person, item or note...">
-
-
+        <input class="search-input" id="searchInput" type="search" placeholder="🔍 Search person, item or note...">
         <div id="activeList"></div>
-
     </div>
-
 </section>
 
-
-
-<!-- ==================================================
-     HISTORY SCREEN
-================================================== -->
-
-<section
-    id="historyScreen"
-    class="screen">
-
-
+<!-- HISTORY SCREEN -->
+<section id="historyScreen" class="screen">
     <div class="screen-header">
-
-        <button
-            class="back-button"
-            id="historyBackButton"
-            type="button">
-
-            ←
-
-        </button>
-
-        <div class="screen-title">
-            Returned History
-        </div>
-
+        <button class="back-button" id="historyBackButton" type="button">←</button>
+        <div class="screen-title">Returned History</div>
     </div>
-
-
     <div class="card">
-
         <div id="historyList"></div>
-
     </div>
-
 </section>
 
-
-
-<!-- ==================================================
-     SETTINGS SCREEN
-================================================== -->
-
-<section
-    id="settingsScreen"
-    class="screen">
-
-
+<!-- SETTINGS SCREEN -->
+<section id="settingsScreen" class="screen">
     <div class="screen-header">
-
-        <button
-            class="back-button"
-            id="settingsBackButton"
-            type="button">
-
-            ←
-
-        </button>
-
-        <div class="screen-title">
-            Settings
-        </div>
-
+        <button class="back-button" id="settingsBackButton" type="button">←</button>
+        <div class="screen-title">Settings</div>
     </div>
 
-
-    <!-- APPEARANCE -->
-
     <div class="card">
-
         <div class="card-title">
-
-            <h2>
-                🎨 Appearance
-            </h2>
-
+            <h2>🎨 Appearance</h2>
         </div>
-
-
         <div class="setting-row">
-
             <div class="setting-text">
-
-                <strong>
-                    🌙 Dark Mode
-                </strong>
-
-                <span>
-                    Change BorrowBox appearance.
-                </span>
-
+                <strong>🌙 Dark Mode</strong>
+                <span>Change BorrowBox appearance.</span>
             </div>
-
-
-            <button
-                class="small-button"
-                id="settingsThemeButton"
-                type="button">
-
-                🌙
-
-            </button>
-
+            <button class="small-button" id="settingsThemeButton" type="button">🌙</button>
         </div>
-
     </div>
 
-
-
-    <!-- LENDING -->
-
     <div class="card">
-
         <div class="card-title">
-
-            <h2>
-                📅 Lending
-            </h2>
-
+            <h2>📅 Lending</h2>
         </div>
-
-
         <div class="setting-row">
-
             <div class="setting-text">
-
-                <strong>
-                    Default Return Period
-                </strong>
-
-                <span>
-                    Automatically set a due date when adding a lending.
-                </span>
-
+                <strong>Default Return Period</strong>
+                <span>Automatically set a due date when adding a lending.</span>
             </div>
-
-
-            <select
-                id="defaultPeriod"
-                style="width:auto">
-
-                <option value="0">
-                    None
-                </option>
-
-                <option value="7">
-                    7 Days
-                </option>
-
-                <option value="14">
-                    14 Days
-                </option>
-
-                <option value="30">
-                    30 Days
-                </option>
-
+            <select id="defaultPeriod" style="width:auto">
+                <option value="0">None</option>
+                <option value="7">7 Days</option>
+                <option value="14">14 Days</option>
+                <option value="30">30 Days</option>
             </select>
-
         </div>
-
     </div>
 
-
-
-    <!-- DATA -->
-
     <div class="card">
-
         <div class="card-title">
-
-            <h2>
-                💾 Data
-            </h2>
-
+            <h2>💾 Data</h2>
         </div>
-
-
         <div class="setting-row">
-
             <div class="setting-text">
-
-                <strong>
-                    Total Records
-                </strong>
-
-                <span>
-                    All records currently stored.
-                </span>
-
+                <strong>Total Records</strong>
+                <span>All records currently stored.</span>
             </div>
-
-
-            <strong id="totalRecords">
-                0
-            </strong>
-
+            <strong id="totalRecords">0</strong>
         </div>
-
-
-        <button
-            class="secondary-button"
-            id="exportButton"
-            type="button">
-
-            📤 Export Backup
-
-        </button>
-
-
+        <button class="secondary-button" id="exportButton" type="button">📤 Export Backup</button>
         <br><br>
-
-
-        <button
-            class="secondary-button"
-            id="importButton"
-            type="button">
-
-            📥 Import Backup
-
-        </button>
-
-
-        <input
-            type="file"
-            id="importFile"
-            accept=".json"
-            hidden>
-
-
-        <button
-            class="danger-button"
-            id="clearButton"
-            type="button">
-
-            🗑️ Delete All Data
-
-        </button>
-
+        <button class="secondary-button" id="importButton" type="button">📥 Import Backup</button>
+        <input type="file" id="importFile" accept=".json" hidden>
+        <button class="danger-button" id="clearButton" type="button">🗑️ Delete All Data</button>
     </div>
-
-
-
-    <!-- ABOUT -->
 
     <div class="card">
-
         <div class="card-title">
-
-            <h2>
-                ℹ️ About
-            </h2>
-
+            <h2>ℹ️ About</h2>
         </div>
-
-
         <div class="about-box">
-
-            <div class="about-logo">
-                📦
-            </div>
-
-
-            <h2>
-                BorrowBox
-            </h2>
-
-
-            <p>
-                A simple personal lending tracker
-                that helps you remember what you
-                have lent to others.
-            </p>
-
-
+            <div class="about-logo">📦</div>
+            <h2>BorrowBox</h2>
+            <p>A simple personal lending tracker that helps you remember what you have lent to others.</p>
             <div class="creator">
-
                 Created by
-
-                <strong>
-                    Pijush Mandal
-                </strong>
-
-                <div
-                    class="person"
-                    style="margin-top:8px">
-
-                    Made with ❤️ in India
-
-                </div>
-
+                <strong>Pijush Mandal</strong>
+                <div class="person" style="margin-top:8px">Made with ❤️ in India</div>
             </div>
-
-
-            <p>
-                Version 1.0.0
-            </p>
-
+            <p>Version 1.0.0</p>
         </div>
-
     </div>
-
-
 </section>
-
 
 </main>
 
-
-
-<!-- ==================================================
-     ADD / EDIT MODAL
-================================================== -->
-
-<div
-    class="modal-overlay"
-    id="modalOverlay">
-
-
+<!-- ADD / EDIT MODAL -->
+<div class="modal-overlay" id="modalOverlay">
     <div class="modal">
-
-
         <div class="modal-header">
-
-            <button
-                class="modal-back"
-                id="modalBackButton"
-                type="button">
-
-                ←
-
-            </button>
-
-
-            <h2 id="modalTitle">
-                ➕ Add Lending
-            </h2>
-
+            <button class="modal-back" id="modalBackButton" type="button">←</button>
+            <h2 id="modalTitle">➕ Add Lending</h2>
         </div>
+
+        <form id="lendingForm">
+            <input type="hidden" id="editId">
+
+            <label>Lending Type</label>
+            <div class="type-buttons">
+                <button type="button" class="type-button selected" id="typeItemBtn">📦 Item</button>
+                <button type="button" class="type-button" id="typeMoneyBtn">💵 Money</button>
+            </div>
+
+            <label for="itemInput">Item Name or Amount</label>
+            <input type="text" id="itemInput" placeholder="e.g. Physics Book or ₹500" required>
+
+            <label for="personInput">Whom did you lend it to?</label>
+            <input type="text" id="personInput" placeholder="Person's name" required>
+
+            <label for="dateInput">Date Lent</label>
+            <input type="date" id="dateInput" required>
+
+            <label for="dueDateInput">Due Date (Optional)</label>
+            <input type="date" id="dueDateInput">
+
+            <label for="noteInput">Notes (Optional)</label>
+            <textarea id="noteInput" placeholder="Condition, location, or reminder remarks..."></textarea>
+
+            <div class="modal-actions">
+                <button type="button" class="cancel-button" id="cancelModalButton">Cancel</button>
+                <button type="submit" class="save-button" id="saveLendingButton">Save Record</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+/* ==================================================
+   STATE & STORAGE
+================================================== */
+let lendings = JSON.parse(localStorage.getItem('borrowbox_items')) || [];
+let selectedType = 'Item';
+
+function saveLendings() {
+    localStorage.setItem('borrowbox_items', JSON.stringify(lendings));
+    renderAll();
+}
+
+/* ==================================================
+   NAVIGATION
+================================================== */
+const screens = {
+    home: document.getElementById('homeScreen'),
+    active: document.getElementById('activeScreen'),
+    history: document.getElementById('historyScreen'),
+    settings: document.getElementById('settingsScreen')
+};
+
+function showScreen(screenKey) {
+    Object.values(screens).forEach(screen => screen.classList.remove('active'));
+    if (screens[screenKey]) {
+        screens[screenKey].classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+document.getElementById('activeButton').addEventListener('click', () => showScreen('active'));
+document.getElementById('historyButton').addEventListener('click', () => showScreen('history'));
+document.getElementById('settingsButton').addEventListener('click', () => showScreen('settings'));
+
+document.getElementById('activeBackButton').addEventListener('click', () => showScreen('home'));
+document.getElementById('historyBackButton').addEventListener('click', () => showScreen('home'));
+document.getElementById('settingsBackButton').addEventListener('click', () => showScreen('home'));
+
+/* ==================================================
+   THEME TOGGLE
+================================================== */
+function toggleTheme() {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    localStorage.setItem('borrowbox_theme', isDark ? 'dark' : 'light');
+    updateThemeIcons(isDark);
+}
+
+function updateThemeIcons(isDark) {
+    const icon = isDark ? '☀️' : '🌙';
+    document.getElementById('headerThemeButton').textContent = icon;
+    document.getElementById('settingsThemeButton').textContent = icon;
+}
+
+document.getElementById('headerThemeButton').addEventListener('click', toggleTheme);
+document.getElementById('settingsThemeButton').addEventListener('click', toggleTheme);
+
+if (localStorage.getItem('borrowbox_theme') === 'dark') {
+    document.body.classList.add('dark');
+    updateThemeIcon
