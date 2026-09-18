@@ -14,18 +14,24 @@
   --muted:#64748b;
   --border:#e2e8f0;
   --primary:#2563eb;
-  --primary2:#1d4ed8;
+  --primary-dark:#1d4ed8;
   --green:#16a34a;
   --red:#dc2626;
   --orange:#ea580c;
   --shadow:0 8px 25px rgba(15,23,42,.07);
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
   margin:0;
-  font-family:Inter,Arial,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   background:var(--bg);
   color:var(--text);
 }
@@ -39,18 +45,12 @@ body.dark{
   --shadow:0 8px 25px rgba(0,0,0,.25);
 }
 
-button,input,select,textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
+/* HEADER */
 
 .topbar{
   background:linear-gradient(135deg,#0f172a,#1e3a8a);
   color:white;
-  padding:24px 18px 28px;
+  padding:20px 16px 24px;
   border-radius:0 0 28px 28px;
 }
 
@@ -60,7 +60,6 @@ button{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:15px;
 }
 
 .brand{
@@ -72,11 +71,11 @@ button{
 .logo{
   width:48px;
   height:48px;
-  background:rgba(255,255,255,.13);
-  border-radius:15px;
   display:flex;
   align-items:center;
   justify-content:center;
+  background:rgba(255,255,255,.13);
+  border-radius:15px;
   font-size:25px;
 }
 
@@ -92,20 +91,57 @@ button{
 }
 
 .theme-btn{
+  width:42px;
+  height:42px;
   border:1px solid rgba(255,255,255,.2);
   background:rgba(255,255,255,.1);
   color:white;
-  width:42px;
-  height:42px;
   border-radius:12px;
   font-size:19px;
 }
+
+/* CONTAINER */
 
 .container{
   max-width:850px;
   margin:auto;
   padding:20px 16px 50px;
 }
+
+/* NAVIGATION */
+
+.screen{
+  display:none;
+}
+
+.screen.active{
+  display:block;
+}
+
+.back-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:16px;
+}
+
+.back-btn{
+  width:42px;
+  height:42px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:12px;
+  font-size:22px;
+  box-shadow:var(--shadow);
+}
+
+.back-title{
+  font-size:20px;
+  font-weight:800;
+}
+
+/* BUTTONS */
 
 .primary-btn{
   width:100%;
@@ -120,8 +156,39 @@ button{
 }
 
 .primary-btn:hover{
-  background:var(--primary2);
+  background:var(--primary-dark);
 }
+
+.secondary-btn{
+  width:100%;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  padding:14px;
+  border-radius:13px;
+  font-weight:700;
+}
+
+/* QUICK ACTIONS */
+
+.quick-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:14px;
+}
+
+.quick-btn{
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  padding:15px 10px;
+  border-radius:15px;
+  font-weight:700;
+  box-shadow:var(--shadow);
+}
+
+/* STATS */
 
 .stats{
   display:grid;
@@ -154,6 +221,8 @@ button{
   margin-top:2px;
 }
 
+/* CARDS */
+
 .card{
   background:var(--card);
   border:1px solid var(--border);
@@ -176,6 +245,8 @@ button{
   font-size:18px;
 }
 
+/* SEARCH */
+
 .search{
   width:100%;
   padding:13px 15px;
@@ -193,6 +264,8 @@ select:focus,
 textarea:focus{
   border-color:var(--primary);
 }
+
+/* ITEMS */
 
 .item{
   border:1px solid var(--border);
@@ -216,15 +289,17 @@ textarea:focus{
 .person{
   color:var(--muted);
   font-size:13px;
-  margin-top:4px;
+  margin-top:5px;
 }
 
 .badge{
   padding:5px 9px;
   border-radius:20px;
-  font-size:11px;
+  font-size:10px;
   font-weight:700;
   white-space:nowrap;
+  display:inline-block;
+  margin-bottom:4px;
 }
 
 .badge-item{
@@ -247,10 +322,15 @@ textarea:focus{
   color:#b91c1c;
 }
 
+.badge-returned{
+  background:#dcfce7;
+  color:#166534;
+}
+
 .details{
   margin-top:12px;
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:1fr 1fr;
   gap:7px;
 }
 
@@ -276,7 +356,7 @@ textarea:focus{
 .action{
   flex:1;
   border:0;
-  padding:10px;
+  padding:10px 7px;
   border-radius:10px;
   font-size:12px;
   font-weight:700;
@@ -300,19 +380,21 @@ textarea:focus{
 .empty{
   text-align:center;
   color:var(--muted);
-  padding:22px 10px;
+  padding:25px 10px;
   font-size:14px;
 }
+
+/* MODAL */
 
 .modal-bg{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.55);
+  background:rgba(0,0,0,.58);
   display:none;
   align-items:center;
   justify-content:center;
   padding:16px;
-  z-index:100;
+  z-index:1000;
 }
 
 .modal{
@@ -326,8 +408,26 @@ textarea:focus{
   padding:20px;
 }
 
-.modal h2{
-  margin-top:0;
+.modal-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.modal-header h2{
+  margin:0;
+  font-size:20px;
+}
+
+.modal-back{
+  width:40px;
+  height:40px;
+  border:1px solid var(--border);
+  background:var(--bg);
+  color:var(--text);
+  border-radius:11px;
+  font-size:20px;
 }
 
 label{
@@ -337,7 +437,9 @@ label{
   margin:13px 0 6px;
 }
 
-input,select,textarea{
+input,
+select,
+textarea{
   width:100%;
   padding:12px;
   border:1px solid var(--border);
@@ -397,9 +499,45 @@ textarea{
   color:white;
 }
 
-.history-title{
-  margin-top:25px;
+/* SETTINGS */
+
+.setting-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:15px 0;
+  border-bottom:1px solid var(--border);
 }
+
+.setting-row:last-child{
+  border-bottom:0;
+}
+
+.setting-info strong{
+  display:block;
+  font-size:15px;
+}
+
+.setting-info span{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+.danger-btn{
+  width:100%;
+  margin-top:12px;
+  padding:13px;
+  border:0;
+  border-radius:11px;
+  background:#fee2e2;
+  color:#b91c1c;
+  font-weight:700;
+}
+
+/* FOOTER */
 
 .footer{
   text-align:center;
@@ -408,9 +546,11 @@ textarea{
   padding:15px;
 }
 
+/* MOBILE */
+
 @media(max-width:600px){
+
   .stats{
-    grid-template-columns:repeat(3,1fr);
     gap:8px;
   }
 
@@ -420,10 +560,6 @@ textarea{
 
   .stat-number{
     font-size:20px;
-  }
-
-  .details{
-    grid-template-columns:1fr 1fr;
   }
 
   .actions{
@@ -439,87 +575,323 @@ textarea{
 
 <body>
 
+<!-- HEADER -->
+
 <header class="topbar">
+
   <div class="topbar-inner">
+
     <div class="brand">
-      <div class="logo">📦</div>
+
+      <div class="logo">
+        📦
+      </div>
+
       <div>
         <h1>BorrowBox</h1>
         <p>Remember what you lent.</p>
       </div>
+
     </div>
 
-    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+    <button
+      class="theme-btn"
+      onclick="toggleTheme()"
+      id="themeBtn">
+      🌙
+    </button>
+
   </div>
+
 </header>
+
 
 <main class="container">
 
-  <button class="primary-btn" onclick="openModal()">
+
+<!-- ================= HOME ================= -->
+
+<section id="homeScreen" class="screen active">
+
+  <button
+    class="primary-btn"
+    onclick="openModal()">
     ＋ Add Lending
   </button>
 
+
+  <div class="quick-actions">
+
+    <button
+      class="quick-btn"
+      onclick="showScreen('activeScreen')">
+      📦 Active Lendings
+    </button>
+
+    <button
+      class="quick-btn"
+      onclick="showScreen('historyScreen')">
+      📜 History
+    </button>
+
+  </div>
+
+
   <section class="stats">
+
     <div class="stat">
       <div class="stat-icon">📦</div>
-      <div class="stat-number" id="activeCount">0</div>
-      <div class="stat-label">Active</div>
+      <div
+        class="stat-number"
+        id="activeCount">
+        0
+      </div>
+      <div class="stat-label">
+        Active
+      </div>
     </div>
+
 
     <div class="stat">
       <div class="stat-icon">⏰</div>
-      <div class="stat-number" id="dueCount">0</div>
-      <div class="stat-label">Due Soon</div>
+      <div
+        class="stat-number"
+        id="dueCount">
+        0
+      </div>
+      <div class="stat-label">
+        Due Soon
+      </div>
     </div>
+
 
     <div class="stat">
       <div class="stat-icon">✅</div>
-      <div class="stat-number" id="returnedCount">0</div>
-      <div class="stat-label">Returned</div>
+      <div
+        class="stat-number"
+        id="returnedCount">
+        0
+      </div>
+      <div class="stat-label">
+        Returned
+      </div>
     </div>
+
   </section>
 
-  <section class="card">
+
+  <div class="card">
+
     <div class="card-title">
-      <h2>📦 Active Lendings</h2>
+      <h2>⚡ Quick Overview</h2>
     </div>
 
-    <input
-      class="search"
-      id="search"
-      placeholder="🔍 Search person, item or note..."
-      oninput="render()"
-    >
+    <div
+      id="homeOverview">
+    </div>
 
-    <div id="activeList"></div>
-  </section>
+  </div>
 
-  <section class="card">
+
+  <div class="card">
+
     <div class="card-title">
-      <h2 class="history-title">📜 History</h2>
+      <h2>⚙️ More</h2>
     </div>
 
-    <div id="historyList"></div>
-  </section>
+    <button
+      class="secondary-btn"
+      onclick="showScreen('settingsScreen')">
+      ⚙️ Settings
+    </button>
+
+  </div>
+
 
   <div class="footer">
     BorrowBox • Your lending records stay on this device.
   </div>
 
+</section>
+
+
+
+<!-- ================= ACTIVE ================= -->
+
+<section id="activeScreen" class="screen">
+
+  <div class="back-row">
+
+    <button
+      class="back-btn"
+      onclick="showScreen('homeScreen')">
+      ←
+    </button>
+
+    <div class="back-title">
+      Active Lendings
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <input
+      class="search"
+      id="activeSearch"
+      placeholder="🔍 Search person, item or note..."
+      oninput="renderActive()"
+    >
+
+    <div id="activeList">
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= HISTORY ================= -->
+
+<section id="historyScreen" class="screen">
+
+  <div class="back-row">
+
+    <button
+      class="back-btn"
+      onclick="showScreen('homeScreen')">
+      ←
+    </button>
+
+    <div class="back-title">
+      Returned History
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div id="historyList">
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================= SETTINGS ================= -->
+
+<section id="settingsScreen" class="screen">
+
+  <div class="back-row">
+
+    <button
+      class="back-btn"
+      onclick="showScreen('homeScreen')">
+      ←
+    </button>
+
+    <div class="back-title">
+      Settings
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="setting-row">
+
+      <div class="setting-info">
+        <strong>🌙 Dark Mode</strong>
+        <span>Change the appearance of BorrowBox.</span>
+      </div>
+
+      <button
+        class="theme-btn"
+        style="background:var(--bg);color:var(--text);border-color:var(--border)"
+        onclick="toggleTheme()">
+        🌙
+      </button>
+
+    </div>
+
+
+    <div class="setting-row">
+
+      <div class="setting-info">
+        <strong>💾 Local Storage</strong>
+        <span>Your records are saved on this device.</span>
+      </div>
+
+      <span>✓</span>
+
+    </div>
+
+
+    <div class="setting-row">
+
+      <div class="setting-info">
+        <strong>📦 Total Records</strong>
+        <span>All lending records stored in BorrowBox.</span>
+      </div>
+
+      <strong id="totalRecords">
+        0
+      </strong>
+
+    </div>
+
+
+    <button
+      class="danger-btn"
+      onclick="clearAllData()">
+      🗑️ Delete All Data
+    </button>
+
+  </div>
+
+</section>
+
 </main>
 
 
-<!-- MODAL -->
 
-<div class="modal-bg" id="modalBg">
+<!-- ================= ADD / EDIT MODAL ================= -->
+
+<div
+  class="modal-bg"
+  id="modalBg">
 
   <div class="modal">
 
-    <h2 id="modalTitle">➕ Add Lending</h2>
 
-    <label>What did you lend?</label>
+    <div class="modal-header">
+
+      <button
+        class="modal-back"
+        onclick="closeModal()">
+        ←
+      </button>
+
+      <h2 id="modalTitle">
+        ➕ Add Lending
+      </h2>
+
+    </div>
+
+
+    <label>
+      What did you lend?
+    </label>
+
 
     <div class="type-buttons">
+
       <button
         class="type-btn active"
         id="itemTypeBtn"
@@ -527,32 +899,81 @@ textarea{
         📦 Item
       </button>
 
+
       <button
         class="type-btn"
         id="moneyTypeBtn"
         onclick="setType('money')">
         💰 Money
       </button>
+
     </div>
 
-    <label>Person name *</label>
-    <input id="person" placeholder="e.g. Rahul">
 
-    <label id="thingLabel">Item *</label>
-    <input id="thing" placeholder="e.g. Power Bank">
+    <label>
+      Person name *
+    </label>
 
-    <label>Given date</label>
-    <input id="givenDate" type="date">
+    <input
+      id="person"
+      placeholder="e.g. Rahul"
+    >
 
-    <label>Return / repayment date</label>
-    <input id="dueDate" type="date">
 
-    <label>Note</label>
-    <textarea id="note" placeholder="Optional note..."></textarea>
+    <label id="thingLabel">
+      Item *
+    </label>
+
+    <input
+      id="thing"
+      placeholder="e.g. Power Bank"
+    >
+
+
+    <label>
+      Given date
+    </label>
+
+    <input
+      id="givenDate"
+      type="date"
+    >
+
+
+    <label>
+      Return / repayment date
+    </label>
+
+    <input
+      id="dueDate"
+      type="date"
+    >
+
+
+    <label>
+      Note
+    </label>
+
+    <textarea
+      id="note"
+      placeholder="Optional note..."
+    ></textarea>
+
 
     <div class="modal-actions">
-      <button class="cancel" onclick="closeModal()">Cancel</button>
-      <button class="save" onclick="saveLending()">Save</button>
+
+      <button
+        class="cancel"
+        onclick="closeModal()">
+        Cancel
+      </button>
+
+      <button
+        class="save"
+        onclick="saveLending()">
+        Save
+      </button>
+
     </div>
 
   </div>
@@ -560,139 +981,348 @@ textarea{
 </div>
 
 
+
 <script>
 
+/* ================= DATA ================= */
+
 let records =
-JSON.parse(localStorage.getItem("borrowbox_records")) || [];
+  JSON.parse(
+    localStorage.getItem("borrowbox_records")
+  ) || [];
 
 let editingId = null;
+
 let currentType = "item";
 
 
-/* ---------- UTILITIES ---------- */
+/* ================= BASIC FUNCTIONS ================= */
 
 function today(){
-  return new Date().toISOString().split("T")[0];
+
+  return new Date()
+    .toISOString()
+    .split("T")[0];
+
 }
 
+
 function saveData(){
+
   localStorage.setItem(
     "borrowbox_records",
     JSON.stringify(records)
   );
+
 }
+
 
 function escapeHTML(value){
-  const div=document.createElement("div");
-  div.textContent=value ?? "";
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    value ?? "";
+
   return div.innerHTML;
+
 }
+
 
 function formatDate(date){
-  if(!date) return "Not set";
 
-  const d=new Date(date+"T00:00:00");
+  if(!date)
+    return "Not set";
 
-  return d.toLocaleDateString(undefined,{
-    day:"numeric",
-    month:"short",
-    year:"numeric"
-  });
+  const d =
+    new Date(date + "T00:00:00");
+
+  return d.toLocaleDateString(
+    undefined,
+    {
+      day:"numeric",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
 }
 
 
-/* ---------- MODAL ---------- */
+/* ================= SCREEN NAVIGATION ================= */
 
-function openModal(id=null){
+function showScreen(screenId){
 
-  editingId=id;
+  const screens =
+    document.querySelectorAll(".screen");
 
-  document.getElementById("modalBg").style.display="flex";
+  screens.forEach(screen => {
+    screen.classList.remove("active");
+  });
+
+  const target =
+    document.getElementById(screenId);
+
+  if(target){
+    target.classList.add("active");
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+  renderAll();
+
+}
+
+
+/* ================= MODAL ================= */
+
+function openModal(id = null){
+
+  editingId = id;
+
+  document.getElementById(
+    "modalBg"
+  ).style.display = "flex";
+
 
   if(id){
 
-    const record=records.find(r=>r.id===id);
+    const record =
+      records.find(
+        r => r.id === id
+      );
 
-    if(!record) return;
+    if(!record)
+      return;
 
-    document.getElementById("modalTitle").textContent="✏️ Edit Lending";
 
-    document.getElementById("person").value=record.person;
-    document.getElementById("thing").value=record.thing;
-    document.getElementById("givenDate").value=record.givenDate;
-    document.getElementById("dueDate").value=record.dueDate || "";
-    document.getElementById("note").value=record.note || "";
+    document.getElementById(
+      "modalTitle"
+    ).textContent =
+      "✏️ Edit Lending";
+
+
+    document.getElementById(
+      "person"
+    ).value =
+      record.person;
+
+
+    document.getElementById(
+      "thing"
+    ).value =
+      record.thing;
+
+
+    document.getElementById(
+      "givenDate"
+    ).value =
+      record.givenDate;
+
+
+    document.getElementById(
+      "dueDate"
+    ).value =
+      record.dueDate || "";
+
+
+    document.getElementById(
+      "note"
+    ).value =
+      record.note || "";
+
 
     setType(record.type);
 
   }else{
 
-    document.getElementById("modalTitle").textContent="➕ Add Lending";
+    document.getElementById(
+      "modalTitle"
+    ).textContent =
+      "➕ Add Lending";
 
-    document.getElementById("person").value="";
-    document.getElementById("thing").value="";
-    document.getElementById("givenDate").value=today();
-    document.getElementById("dueDate").value="";
-    document.getElementById("note").value="";
+
+    document.getElementById(
+      "person"
+    ).value = "";
+
+
+    document.getElementById(
+      "thing"
+    ).value = "";
+
+
+    document.getElementById(
+      "givenDate"
+    ).value =
+      today();
+
+
+    document.getElementById(
+      "dueDate"
+    ).value = "";
+
+
+    document.getElementById(
+      "note"
+    ).value = "";
+
 
     setType("item");
+
   }
+
 }
 
+
 function closeModal(){
-  document.getElementById("modalBg").style.display="none";
-  editingId=null;
+
+  document.getElementById(
+    "modalBg"
+  ).style.display = "none";
+
+  editingId = null;
+
 }
+
+
+/* ================= TYPE ================= */
 
 function setType(type){
 
-  currentType=type;
+  currentType = type;
 
-  const itemBtn=document.getElementById("itemTypeBtn");
-  const moneyBtn=document.getElementById("moneyTypeBtn");
-  const label=document.getElementById("thingLabel");
-  const input=document.getElementById("thing");
+  const itemBtn =
+    document.getElementById(
+      "itemTypeBtn"
+    );
 
-  itemBtn.classList.toggle("active",type==="item");
-  moneyBtn.classList.toggle("active",type==="money");
+  const moneyBtn =
+    document.getElementById(
+      "moneyTypeBtn"
+    );
 
-  if(type==="money"){
-    label.textContent="Amount *";
-    input.placeholder="e.g. ₹500";
+  const label =
+    document.getElementById(
+      "thingLabel"
+    );
+
+  const input =
+    document.getElementById(
+      "thing"
+    );
+
+
+  itemBtn.classList.toggle(
+    "active",
+    type === "item"
+  );
+
+
+  moneyBtn.classList.toggle(
+    "active",
+    type === "money"
+  );
+
+
+  if(type === "money"){
+
+    label.textContent =
+      "Amount *";
+
+    input.placeholder =
+      "e.g. ₹500";
+
   }else{
-    label.textContent="Item *";
-    input.placeholder="e.g. Power Bank";
+
+    label.textContent =
+      "Item *";
+
+    input.placeholder =
+      "e.g. Power Bank";
+
   }
+
 }
 
 
-/* ---------- SAVE ---------- */
+/* ================= SAVE ================= */
 
 function saveLending(){
 
-  const person=document.getElementById("person").value.trim();
-  const thing=document.getElementById("thing").value.trim();
-  const givenDate=document.getElementById("givenDate").value;
-  const dueDate=document.getElementById("dueDate").value;
-  const note=document.getElementById("note").value.trim();
+  const person =
+    document.getElementById(
+      "person"
+    ).value.trim();
+
+
+  const thing =
+    document.getElementById(
+      "thing"
+    ).value.trim();
+
+
+  const givenDate =
+    document.getElementById(
+      "givenDate"
+    ).value;
+
+
+  const dueDate =
+    document.getElementById(
+      "dueDate"
+    ).value;
+
+
+  const note =
+    document.getElementById(
+      "note"
+    ).value.trim();
+
 
   if(!person || !thing){
-    alert("Please enter the person name and item/amount.");
+
+    alert(
+      "Please enter the person name and item/amount."
+    );
+
     return;
+
   }
+
 
   if(editingId){
 
-    const record=records.find(r=>r.id===editingId);
+    const record =
+      records.find(
+        r => r.id === editingId
+      );
+
 
     if(record){
 
-      record.person=person;
-      record.thing=thing;
-      record.givenDate=givenDate;
-      record.dueDate=dueDate;
-      record.note=note;
-      record.type=currentType;
+      record.person =
+        person;
+
+      record.thing =
+        thing;
+
+      record.givenDate =
+        givenDate;
+
+      record.dueDate =
+        dueDate;
+
+      record.note =
+        note;
+
+      record.type =
+        currentType;
+
     }
 
   }else{
@@ -718,320 +1348,167 @@ function saveLending(){
       returnedDate:""
 
     });
+
   }
 
+
   saveData();
+
   closeModal();
-  render();
+
+  renderAll();
+
 }
 
 
-/* ---------- STATUS ---------- */
+/* ================= DATE STATUS ================= */
 
 function isDueSoon(record){
 
-  if(!record.dueDate) return false;
+  if(!record.dueDate)
+    return false;
 
-  const todayDate=new Date();
-  const due=new Date(record.dueDate+"T00:00:00");
 
-  const diff=Math.ceil(
-    (due-todayDate)/(1000*60*60*24)
-  );
+  const now =
+    new Date();
 
-  return diff>=0 && diff<=3;
+
+  const todayDate =
+    new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
+    );
+
+
+  const due =
+    new Date(
+      record.dueDate + "T00:00:00"
+    );
+
+
+  const diff =
+    Math.ceil(
+      (due - todayDate) /
+      (1000 * 60 * 60 * 24)
+    );
+
+
+  return diff >= 0 && diff <= 3;
+
 }
+
 
 function isOverdue(record){
 
-  if(!record.dueDate) return false;
+  if(!record.dueDate)
+    return false;
 
-  const todayDate=new Date();
-  const due=new Date(record.dueDate+"T00:00:00");
 
-  return due < new Date(
-    todayDate.getFullYear(),
-    todayDate.getMonth(),
-    todayDate.getDate()
-  );
+  const now =
+    new Date();
+
+
+  const todayDate =
+    new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
+    );
+
+
+  const due =
+    new Date(
+      record.dueDate + "T00:00:00"
+    );
+
+
+  return due < todayDate;
+
 }
+
 
 function statusBadge(record){
 
   if(isOverdue(record)){
-    return `<span class="badge badge-overdue">OVERDUE</span>`;
+
+    return `
+      <span class="badge badge-overdue">
+        OVERDUE
+      </span>
+    `;
+
   }
+
 
   if(isDueSoon(record)){
-    return `<span class="badge badge-due">DUE SOON</span>`;
+
+    return `
+      <span class="badge badge-due">
+        DUE SOON
+      </span>
+    `;
+
   }
 
+
   return "";
+
 }
 
 
-/* ---------- RETURN ---------- */
+/* ================= RETURN ================= */
 
 function markReturned(id){
 
-  const record=records.find(r=>r.id===id);
+  const record =
+    records.find(
+      r => r.id === id
+    );
 
-  if(!record) return;
 
-  record.returned=true;
-  record.returnedDate=today();
+  if(!record)
+    return;
+
+
+  record.returned = true;
+
+  record.returnedDate =
+    today();
+
 
   saveData();
-  render();
+
+  renderAll();
+
 }
 
 
-/* ---------- DELETE ---------- */
+/* ================= DELETE ================= */
 
 function deleteRecord(id){
 
-  const record=records.find(r=>r.id===id);
+  const record =
+    records.find(
+      r => r.id === id
+    );
 
-  if(!record) return;
 
-  const ok=confirm(
-    `Delete "${record.thing}" lent to ${record.person}?`
-  );
+  if(!record)
+    return;
 
-  if(!ok) return;
 
-  records=records.filter(r=>r.id!==id);
+  const ok =
+    confirm(
+      `Delete "${record.thing}" lent to ${record.person}?`
+    );
 
-  saveData();
-  render();
-}
 
+  if(!ok)
+    return;
 
-/* ---------- RENDER CARD ---------- */
 
-function createCard(record){
-
-  const badgeType=
-    record.type==="money"
-    ? `<span class="badge badge-money">💰 MONEY</span>`
-    : `<span class="badge badge-item">📦 ITEM</span>`;
-
-  const status=statusBadge(record);
-
-  return `
-
-  <div class="item">
-
-    <div class="item-top">
-
-      <div>
-        <div class="item-name">
-          ${record.type==="money" ? "💰 " : "📦 "}
-          ${escapeHTML(record.thing)}
-        </div>
-
-        <div class="person">
-          👤 ${escapeHTML(record.person)}
-        </div>
-      </div>
-
-      <div>
-        ${badgeType}
-        ${status}
-      </div>
-
-    </div>
-
-    <div class="details">
-
-      <div class="detail">
-        <span>Given</span>
-        ${formatDate(record.givenDate)}
-      </div>
-
-      <div class="detail">
-        <span>Due</span>
-        ${formatDate(record.dueDate)}
-      </div>
-
-    </div>
-
-    ${
-      record.note
-      ? `<div class="person" style="margin-top:10px">
-          📝 ${escapeHTML(record.note)}
-        </div>`
-      : ""
-    }
-
-    <div class="actions">
-
-      <button
-        class="action return"
-        onclick="markReturned(${record.id})">
-        ✓ ${record.type==="money" ? "Paid" : "Returned"}
-      </button>
-
-      <button
-        class="action edit"
-        onclick="openModal(${record.id})">
-        ✏️ Edit
-      </button>
-
-      <button
-        class="action delete"
-        onclick="deleteRecord(${record.id})">
-        🗑️ Delete
-      </button>
-
-    </div>
-
-  </div>
-
-  `;
-}
-
-
-/* ---------- RENDER ---------- */
-
-function render(){
-
-  const search=
-    document.getElementById("search").value
-    .toLowerCase()
-    .trim();
-
-  const active=records.filter(r=>!r.returned);
-
-  const history=records.filter(r=>r.returned);
-
-  const filteredActive=active.filter(r=>
-
-    r.person.toLowerCase().includes(search) ||
-
-    r.thing.toLowerCase().includes(search) ||
-
-    (r.note || "").toLowerCase().includes(search)
-
-  );
-
-  document.getElementById("activeCount").textContent=
-    active.length;
-
-  document.getElementById("dueCount").textContent=
-    active.filter(r=>isDueSoon(r)||isOverdue(r)).length;
-
-  document.getElementById("returnedCount").textContent=
-    history.length;
-
-
-  const activeList=document.getElementById("activeList");
-
-  if(filteredActive.length===0){
-
-    activeList.innerHTML=
-      `<div class="empty">
-        ${search
-          ? "🔍 No matching lending found."
-          : "📦 No active lendings yet.<br>Add something you lent."}
-      </div>`;
-
-  }else{
-
-    activeList.innerHTML=
-      filteredActive.map(createCard).join("");
-  }
-
-
-  const historyList=document.getElementById("historyList");
-
-  if(history.length===0){
-
-    historyList.innerHTML=
-      `<div class="empty">
-        No returned items yet.
-      </div>`;
-
-  }else{
-
-    historyList.innerHTML=
-      history.map(record=>`
-
-        <div class="item">
-
-          <div class="item-top">
-
-            <div>
-
-              <div class="item-name">
-                ${record.type==="money" ? "💰 " : "📦 "}
-                ${escapeHTML(record.thing)}
-              </div>
-
-              <div class="person">
-                👤 ${escapeHTML(record.person)}
-              </div>
-
-            </div>
-
-            <span class="badge"
-              style="background:#dcfce7;color:#166534">
-              ✓ RETURNED
-            </span>
-
-          </div>
-
-          <div class="details">
-
-            <div class="detail">
-              <span>Given</span>
-              ${formatDate(record.givenDate)}
-            </div>
-
-            <div class="detail">
-              <span>Returned</span>
-              ${formatDate(record.returnedDate)}
-            </div>
-
-          </div>
-
-        </div>
-
-      `).join("");
-  }
-}
-
-
-/* ---------- DARK MODE ---------- */
-
-function toggleTheme(){
-
-  document.body.classList.toggle("dark");
-
-  const dark=document.body.classList.contains("dark");
-
-  localStorage.setItem(
-    "borrowbox_dark",
-    dark ? "1" : "0"
-  );
-
-  document.getElementById("themeBtn").textContent=
-    dark ? "☀️" : "🌙";
-}
-
-if(localStorage.getItem("borrowbox_dark")==="1"){
-
-  document.body.classList.add("dark");
-
-  document.getElementById("themeBtn").textContent="☀️";
-}
-
-
-/* ---------- START ---------- */
-
-render();
-
-</script>
-
-</body>
-</html>
+  records =
+    records.filter(
+      r => r.id !== id
+    )
